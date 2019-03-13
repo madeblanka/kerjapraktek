@@ -32,10 +32,12 @@
 							Back</a>
 					</div>
 					<div class="card-body">
+						<?php echo validation_errors(); ?>
 
-						<form action="<?php base_url('pegawai/edit') ?>" method="post" enctype="multipart/form-data">
+						<form action="<?php echo base_url('pegawai/edit/'.$pegawai->NIP) ?>" method="post" enctype="multipart/form-data">
 
 							<input type="hidden" name="NIP" value="<?php echo $pegawai->NIP?>" />
+							<input type="hidden" name="CUTI" value="<?php echo $pegawai->CUTI?>" />
 
 							<div class="form-group">
 								<label for="name">NAMA*</label>
