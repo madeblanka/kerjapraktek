@@ -37,17 +37,21 @@ class Pegawai extends CI_Controller
 
         $pegawai = $this->Pegawai_model;
         $validation = $this->form_validation;
-        $validation->set_rules($pegawai->rules());
 
-        if ($validation->run()) {
-            $pegawai->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-        }
+        $validation->set_rules($pegawai->rules());
 
         $data["pegawai"] = $pegawai->getById($NIP);
         if (!$data["pegawai"]) show_404();
+        
+        if ($validation->run()) {
+            // var_dump($pegawai);
+            $pegawai->update();
+            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            redirect('/pegawai/edit/'.$pegawai->NIP);
+        } else {
+            $this->load->view("pegawai/edit_form", $data);
+        }
 
-        $this->load->view("pegawai/edit_form", $data);
     }
 
     public function delete($id=null)
