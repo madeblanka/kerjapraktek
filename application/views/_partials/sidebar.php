@@ -10,11 +10,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fas fa-fw fa-boxes"></i>
-            <span>Products</span>
+            <span>Pegawai</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="<?php echo site_url('products/add') ?>">New Product</a>
-            <a class="dropdown-item" href="<?php echo site_url('products') ?>">List Product</a>
+            <a class="dropdown-item" href="<?php echo site_url('pegawai/add') ?>">New Pegawai</a>
+            <a class="dropdown-item" href="<?php echo site_url('pegawai/index') ?>">List Pegawai</a>
         </div>
     </li>
     <li class="nav-item">

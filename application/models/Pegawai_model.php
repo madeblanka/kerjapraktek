@@ -19,7 +19,7 @@ class Pegawai_model extends CI_Model
     public $CUTI;
     public $CUTI_DIPAKAI;
     public $CUTI_SISA;
-    public $IMG = "default.jpg";
+    public $IMG = "defaultman.jpg";
 
     public function rules()
     {
@@ -111,7 +111,8 @@ class Pegawai_model extends CI_Model
         $this->JENIS_KELAMIN = $post["JENIS_KELAMIN"];
         $this->CUTI = $post["CUTI"];
         $this->CUTI_DIPAKAI = $post["CUTI_DIPAKAI"];
-        $this->CUTI_SISA = $post["CUTI_SISA"];
+        $this->CUTI_SISA = $post["CUTI"] - $post["CUTI_DIPAKAI"];
+        $this->IMG = $this->_uploadImagePegawai();
         $this->db->insert($this->_table, $this);
     }
 
@@ -132,12 +133,51 @@ class Pegawai_model extends CI_Model
         $this->JENIS_KELAMIN = $post["JENIS_KELAMIN"];
         $this->CUTI = $post["CUTI"];
         $this->CUTI_DIPAKAI = $post["CUTI_DIPAKAI"];
-        $this->CUTI_SISA = $post["CUTI_SISA"];
+        $this->CUTI_SISA = $post["CUTI"] - $post["CUTI_DIPAKAI"];
+        if (!empty($_FILES["IMG"]["NAMA"])) {
+          $this->IMG = $this->_uploadImagePegawai();
+        } else {
+          $this->IMG = $post["old_image"];
+        }
+
         $this->db->update($this->_table, $this, array('NIP' => $post['NIP']));
     }
 
     public function delete($NIP)
     {
+        $this->_deleteImagePegawai($NIP);
         return $this->db->delete($this->_table, array("NIP" => $NIP));
     }
+
+    private function _uploadImagePegawai()
+    {
+        $config['upload_path']          = './upload/pegawai/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['file_name']            = $this->NIP;
+        $config['overwrite']			      = true;
+        $config['max_size']             = 1024; // 1MB
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('IMG')) {
+            return $this->upload->data("file_name");
+        }
+
+        return "default.jpg";
+    }
+
+    private function _deleteImagePegawai($NIP)
+    {
+      $pegawai = $this->getById($NIP);
+
+      if ($pegawai->IMG != "default.jpg")
+      {
+	         $filename = explode(".", $pegawai->IMG)[0];
+		       return array_map('unlink', glob(FCPATH."upload/pegawai/$filename.*"));
+      }
+
+    }
+
 }
