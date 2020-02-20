@@ -4,14 +4,11 @@
 
 <title><?php echo SITE_NAME .": ". ucfirst($this->uri->segment(1)) ." - ". ucfirst($this->uri->segment(2)) ?></title>
 
-<!-- Bootstrap core CSS-->
-<link href="<?php echo base_url('assets/bower_components/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
-
 <!-- Custom fonts for this template-->
-<link href="<?php echo base_url('assets/bower_components/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
+<link href="<?= base_url() ?>assets/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
 <!-- Page level plugin CSS-->
-<link href="<?php echo base_url('assets/bower_components/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet">
+<link href="<?= base_url() ?>assets/template/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="<?php echo base_url('css/sb-admin.css') ?>" rel="stylesheet">
+<link href="<?= base_url() ?>assets/template/css/sb-admin.css" rel="stylesheet">

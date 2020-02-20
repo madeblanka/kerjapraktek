@@ -1,23 +1,73 @@
 <?php
-class Login extends CI_Controller {
-    public function index() {
-        $this->load->view('login');
-    }
+class Login extends CI_Controller{
 
-    public function formlogin() {
-        $user = $this->input->post('Username');
-        $pass = $this->input->post('Password');
+  function __construct(){
+		parent::__construct();
+		$this->load->model('Login_model');
+	}
 
-        $login = $this->user->ceklogin($user, $pass);
+	function login_coba(){
+		$this->load->view('login.php');
+	}
+	public function aksi_login(){
+		$username = $this->input->post('username');
 
-        if (!empty($login)) {
-            // login berhasil
-            $this->session->set_userdata($login);
-            redirect(base_url('pegawai/list'));
-        } else {
-            // login gagal
-            $this->session->set_flashdata('Gagal Login', 'Silahkan Cek Username Dan Email Anda');
-            redirect(base_url('login'));
-        }
-    }
+		$password = $this->input->post('password');
+
+		$where = array(
+			'USERNAME' => $username,
+			'PASSWORD' => md5($password)
+			);
+
+		$cek = $this->Login_model->ceklogin("holder",$where)->num_rows();
+		if($cek > 0){
+
+			$data_session = array(
+				'nama' => $username,
+				'status' => 'login',
+				'role'=> 'admin'
+				);
+
+			$this->session->set_userdata($data_session);
+
+			redirect(base_url('pegawai/dashboard'));
+
+		}else{
+			$this->session->set_flashdata('msg','Username atau Password salah !!!');
+			redirect('pegawai');
+		}
+	}
+
+  public function loginpengunjung(){
+		$NIP = $this->input->post('NIP');
+
+		$where = array(
+			'NIP' => $NIP
+			);
+
+		$cek = $this->Login_model->loginpengunjung($where);
+		// var_dump($cek); exit();
+		if($cek > 0){
+
+			$data_session = array(
+				'nama' => $NIP,
+				'status' => 'login',
+				'role'=>'pegawai'
+				);
+
+	  $this->session->set_userdata($data_session);
+      $data['pegawai'] = $this->Login_model->hasil($NIP);
+      $this->load->view("pegawai/listp", $data);
+
+		}else{
+			
+			$this->session->set_flashdata('msg','NIP tidak ditemukan !!!');
+			redirect('pegawai');
+		}
+	}
+
+ public	function logout(){
+		$this->session->sess_destroy();
+		redirect(base_url('pegawai'));
+	}
 }

@@ -49,24 +49,6 @@
 							</div>
 
 							<div class="form-group">
-								<label for="name">TMPT_LAHIR*</label>
-								<input class="form-control <?php echo form_error('TMPT_LAHIR') ? 'is-invalid':'' ?>"
-								 type="text" name="TMPT_LAHIR" placeholder="TEMPAT LAHIR" value="<?php echo $pegawai->TMPT_LAHIR ?>" />
-								<div class="invalid-feedback">
-									<?php echo form_error('TMPT_LAHIR') ?>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="name">TGL_LAHIR*</label>
-								<input class="form-control <?php echo form_error('TGL_LAHIR') ? 'is-invalid':'' ?>"
-								 type="date" name="TGL_LAHIR" placeholder="TANGGAL LAHIR" value="<?php echo $pegawai->TGL_LAHIR ?>" />
-								<div class="invalid-feedback">
-									<?php echo form_error('TGL_LAHIR') ?>
-								</div>
-							</div>
-
-							<div class="form-group">
 								<label for="name">UMUR*</label>
 								<input class="form-control <?php echo form_error('UMUR') ? 'is-invalid':'' ?>"
 								 type="number" name="UMUR" placeholder="UMUR" value="<?php echo $pegawai->UMUR ?>" />
@@ -90,6 +72,63 @@
 								 type="text" name="JABATAN" placeholder="JABATAN" value="<?php echo $pegawai->JABATAN ?>" />
 								<div class="invalid-feedback">
 									<?php echo form_error('JABATAN') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">TAMATAN JABATAN*</label>
+								<input class="form-control <?php echo form_error('TAMATANJABATAN') ? 'is-invalid':'' ?>"
+								 type="date" name="TAMATANJABATAN" placeholder="TAMATAN JABATAN" value="<?php echo $pegawai->TAMATANJABATAN ?>" />
+								<div class="invalid-feedback">
+									<?php echo form_error('TAMATANJABATAN') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">PANGKAT*</label>
+								<!-- <input class="form-control <?php //echo form_error('PANGKAT') ? 'is-invalid':'' ?>"
+								 type="text" name="PANGKAT" placeholder="PANGKAT" value="<?php //echo $pegawai->IDPANGKAT ?>" /> -->
+								 <select class="form-control" name="IDPANGKAT">
+									 <optgroup label="TOP">
+									 		<option value="18">TOP</option>
+									 </optgroup>
+								  <optgroup label="GOLONGAN IV ( PEMBINA )">
+										<option value="17">PEMBINA UTAMA</option>
+								    <option value="16">PEMBINA UTAMA MADYA</option>
+								    <option value="15">PEMBINA UTAMA MUDA</option>
+										<option value="14">PEMBINA TINGKAT 1</option>
+										<option value="13">PEMBINA</option>
+								  </optgroup>
+								  <optgroup label="GOLONGAN III ( PENATA )">
+								    <option value="12">PENATA TINGKAT 1</option>
+								    <option value="11">PENATA</option>
+										<option value="10">PENATA MUDA TINGKAT 1</option>
+										<option value="9">PENATA MUDA</option>
+								  </optgroup>
+									<optgroup label="GOLONGAN II ( PENGATUR )">
+										<option value="8">PENGATUR TINGKAT 1</option>
+										<option value="7">PENGATUR</option>
+										<option value="6">PENGATUR MUDA TINGKAT 1</option>
+										<option value="5">PENGATUR MUDA</option>
+									</optgroup>
+									<optgroup label="GOLONGAN I ( JURU )">
+										<option value="4">JURU TINGKAT 1</option>
+										<option value="3">JURU</option>
+										<option value="2">JURU MUDA TINGKAT 1</option>
+										<option value="1">JURU MUDA</option>
+									</optgroup>
+								</select>
+								<div class="invalid-feedback">
+									<?php echo form_error('PANGKAT') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">TAMATAN PANGKAT*</label>
+								<input class="form-control <?php echo form_error('TAMATANJABATAN') ? 'is-invalid':'' ?>"
+								 type="date" name="TAMATANPANGKAT" placeholder="TAMATAN JABATAN" value="<?php echo $pegawai->TAMATANPANGKAT ?>" />
+								<div class="invalid-feedback">
+									<?php echo form_error('TAMATANJABATAN') ?>
 								</div>
 							</div>
 
@@ -139,6 +178,15 @@
 							</div>
 
 							<div class="form-group">
+								<label for="price">CUTI AWAL</label>
+								<input class="form-control <?php echo form_error('CUTI_DIPAKAI') ? 'is-invalid':'' ?>"
+								 type="number" disabled name="CUTI" min="0" placeholder="CUTI DI PAKAI" value="<?php echo $pegawai->CUTI ?>" />
+								<div class="invalid-feedback">
+									<?php echo form_error('CUTI_DIPAKAI') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
 								<label for="price">CUTI DIPAKAI</label>
 								<input class="form-control <?php echo form_error('CUTI_DIPAKAI') ? 'is-invalid':'' ?>"
 								 type="number" name="CUTI_DIPAKAI" min="0" placeholder="CUTI DI PAKAI" value="<?php echo $pegawai->CUTI_DIPAKAI ?>" />
@@ -150,9 +198,22 @@
 							<div class="form-group">
 								<label for="price">CUTI SISA</label>
 								<input class="form-control <?php echo form_error('CUTI_SISA') ? 'is-invalid':'' ?>"
-								 type="number" name="CUTI_SISA" min="0" placeholder="SISA CUTI" value="<?php echo $pegawai->CUTI_SISA ?>" />
+								 type="number" disabled name="CUTI_SISA" min="0" placeholder="SISA CUTI" value="<?php echo $pegawai->CUTI_SISA ?>" />
 								<div class="invalid-feedback">
 									<?php echo form_error('CUTI_SISA') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="TMPT_LAHIR">STATUS*</label>
+								<select class="form-control" name="STATUS">
+								<optgroup label="Pilih Status">
+									<option value="Sukses">Sukses</option>
+									<option value="Menunggu Hari">Menunggu Hari</option>
+									<option value="Gagal">Gagal</option>
+									<option value="Lain Lain nya">Lain Lain nya</option>
+								</optgroup>		<?php echo form_error('TMPT_LAHIR') ?>
+							</select>
 								</div>
 							</div>
 
@@ -166,6 +227,15 @@
 									<?php echo form_error('IMG') ?>
 								</div>
 							</div>
+
+							<!-- <div class="form-group">
+								<label for="name">MASUKAN KODE*</label>
+								<input class="form-control"
+								 type="text" name="MASUKANKODE" placeholder="MASUKANKODE" />
+								<div class="invalid-feedback">
+									<?php echo form_error('CUTI_DIPAKAI') ?>
+								</div>
+							</div> -->
 
 							<input class="btn btn-success" type="submit" name="btn" value="Save" />
 						</form>
